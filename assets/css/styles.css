@@ -861,8 +861,9 @@ body[data-theme="light"] .ghost-btn {
 
 .project-thumbnail {
   width: 100%;
-  height: 210px;
-  object-fit: cover;
+  height: auto;
+  max-height: 260px;
+  object-fit: contain;
   transition: transform 260ms ease-out;
 }
 
@@ -1305,10 +1306,6 @@ body[data-theme="light"] .ghost-btn {
 
   .hero-photo-frame {
     width: min(280px, 70vw);
-  }
-
-  .project-thumbnail {
-    height: 240px;
   }
 
   .projects-grid {
