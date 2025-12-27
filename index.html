@@ -339,7 +339,7 @@
                     <div class="projects-grid">
                         <!-- Project Card -->
                         <article class="project-card reveal-up">
-                            <div class="project-thumbnail-wrapper">
+                            <div class="project-thumbnail-wrapper" data-fullscreen-image>
                                 <!-- Placeholder project image -->
                                 <img src="assets/img/project-placeholder.jpg" alt="Thumbnail preview of personal portfolio website project" class="project-thumbnail">
                                 <div class="project-overlay">
@@ -486,6 +486,17 @@
                 </p>
             </div>
         </footer>
+        
+        <!-- Fullscreen image viewer for project thumbnails -->
+        <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+            <div class="image-lightbox-backdrop" data-lightbox-close></div>
+            <div class="image-lightbox-content" role="dialog" aria-modal="true" aria-label="Project image preview">
+                <button class="image-lightbox-close" type="button" aria-label="Close image preview" data-lightbox-close>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <img src="" alt="" class="image-lightbox-img" id="image-lightbox-img">
+            </div>
+        </div>
     </div>
 
     <!-- Main Script -->

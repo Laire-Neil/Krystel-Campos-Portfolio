@@ -19,6 +19,8 @@
   const skillMeters = document.querySelectorAll(".skills-meter");
   const contactForm = document.getElementById("contact-form");
   const footerYear = document.getElementById("footer-year");
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImg = document.getElementById("image-lightbox-img");
 
   // -------------------------
   // Helper: Set footer year
@@ -178,6 +180,55 @@
   );
 
   skillMeters.forEach((meter) => skillsObserver.observe(meter));
+
+  // -------------------------
+  // Fullscreen project image viewer
+  // -------------------------
+  function openLightboxFromThumbnail(thumbnail) {
+    if (!lightbox || !lightboxImg) return;
+    lightboxImg.src = thumbnail.src;
+    lightboxImg.alt = thumbnail.alt || "Project image preview";
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.addEventListener("keydown", handleLightboxKeydown);
+  }
+
+  function closeLightbox() {
+    if (!lightbox || !lightboxImg) return;
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImg.src = "";
+    lightboxImg.alt = "";
+    document.removeEventListener("keydown", handleLightboxKeydown);
+  }
+
+  function handleLightboxKeydown(event) {
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+  }
+
+  const projectWrappers = document.querySelectorAll(".project-thumbnail-wrapper[data-fullscreen-image]");
+
+  projectWrappers.forEach((wrapper) => {
+    wrapper.style.cursor = "zoom-in";
+    wrapper.addEventListener("click", () => {
+      const img = wrapper.querySelector(".project-thumbnail");
+      if (!img) return;
+      openLightboxFromThumbnail(img);
+    });
+  });
+
+  if (lightbox) {
+    lightbox.addEventListener("click", (event) => {
+      const target = event.target;
+      const shouldClose =
+        target instanceof HTMLElement && target.hasAttribute("data-lightbox-close");
+      if (shouldClose) {
+        closeLightbox();
+      }
+    });
+  }
 
   // -------------------------
   // Contact form validation
